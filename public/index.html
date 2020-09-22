@@ -20,45 +20,37 @@
 </head>
 
 <body>
-    <div class="wrapper ">
-        <div class="total ">
-            <div class="total ">Your total is: $<span id="total ">0</span></div>
+    <div class="wrapper">
+        <div class="total">
+            <div class="total">Your total is: $<span id="total">0</span></div>
         </div>
 
         <div class="form ">
-            <input type="text " id="t-name " placeholder="Name of transaction " />
-            <input type="number " min="0 " id="t-amount " placeholder="Transaction amount " />
-            <button id="add-btn "><i class="fa fa-plus buttons "></i> Add Funds</button>
-            <button id="sub-btn "><i class="fa fa-minus "></i> Subtract Funds</button>
-            <p class="error "></p>
+            <input type="text" id="t-name" placeholder="Name of transaction" />
+            <input type="number" min="0 " id="t-amount" placeholder="Transaction amount" />
+            <button id="add-btn"><i class="fa fa-plus buttons"></i> Add Funds</button>
+            <button id="sub-btn"><i class="fa fa-minus"></i> Subtract Funds</button>
+            <p class="error"></p>
         </div>
 
-        <div class="transactions ">
+        <div class="transactions">
             <table>
                 <thead>
                     <th>Transaction</th>
                     <th>Amount</th>
                 </thead>
-                <tbody id="tbody ">
+                <tbody id="tbody">
 
                 </tbody>
             </table>
         </div>
 
-        <canvas id="myChart "></canvas>
+        <canvas id="myChart"></canvas>
     </div>
     <!-- service worker stuff -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0 "></script>
-    <script src="index.js "></script>
-    <script src="/assets/js/loadPosts.js "></script>
-    <script>
-        if ("serviceWorker " in navigator) {
-            window.addEventListener("load ", () => {
-                navigator.serviceWorker.register("service-worker.js ").then(reg => {
-                    console.log("We found your service worker file! ", reg);
-                });
-            });
-        }
+    <script src="db.js"></script>
+    <script src="index.js ">
     </script>
 </body>
 
