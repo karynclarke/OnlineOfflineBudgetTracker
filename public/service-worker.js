@@ -16,44 +16,25 @@ self.addEventListener("install", function(evt) {
 });
 
 self.addEventListener("fetch", function(event) {
-            if (event.request.url.includes("/api/")) {
-                event.respondWith(
-                    caches.open(DATA_CACHE_NAME).then(cache => {
-                        return fetch(event.request).then(response => {
-                            if (response.status === 200) {
-                                cache.put(event.request.url, response.clone())
-                            }
-                            return response
-                        }).catch(err => {
-                            return cache.match(event.request)
-                        });
-                    }).catch(err => console.log(err))
-
-                )
-                return;
-            }
-            evt.respondWith(caches.open(CACHE_NAME).then(cache => {
-                return cache.match(evt.request).then(response => {
-                    return response || fetch(evt.request);
+    if (event.request.url.includes("/api/")) {
+        event.respondWith(
+            caches.open(DATA_CACHE_NAME).then(cache => {
+                return fetch(event.request).then(response => {
+                    if (response.status === 200) {
+                        cache.put(event.request.url, response.clone())
+                    }
+                    return response
+                }).catch(err => {
+                    return cache.match(event.request)
                 });
-            }));
+            }).catch(err => console.log(err))
+        )
+        return;
+    }
 
-
-
-
-
-
-
-
-            // evt.waitUntil(
-            //     caches.keys().then(keyList => {
-            //         return Promise.all(
-            //             keyList.map(key => {
-            //                 if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-            //                     console.log("Removing old cache data", key);
-            //                     return caches.delete(key);
-            //                 }
-            //             })
-            //         );
-            //     })
-            // );
+    event.respondWith(caches.open(CACHE_NAME).then(cache => {
+        return cache.match(event.request).then(response => {
+            return response || fetch(event.request);
+        });
+    }))
+})
